@@ -1,0 +1,13 @@
+<div class="container">
+    <input class="form-control mr-sm-2" type="text" placeholder="Enter Group Name" autofocus/>
+
+    <ul class="list-group">
+        
+        <li class="list-group-item " *ngFor="let item of friends" >
+            <input class="form-check-input" type="checkbox" value=item id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                {{ item }}
+              </label>             
+        </li>
+    </ul>
+</div>

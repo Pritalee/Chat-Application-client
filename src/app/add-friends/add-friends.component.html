@@ -1,0 +1,15 @@
+<div class="container">
+    <div *ngIf="successMsg">
+        {{successMsg.data}}
+    </div>
+    <input class="form-control mr-sm-2" [formControl]="queryField" type="search" id="keyword" placeholder="Search to add friends" aria-label="Search" autofocus/>
+    <div *ngIf="searchedUsers">
+        <ul class="list-group">
+          <li class="list-group-item " *ngFor="let item of searchedUsers.friends" >
+              <div>{{item.userName}}</div>  
+              
+              <button type="submit" class="btn btn-primary" (click)="AddFriends(item.userName)" >Connect</button>                  
+          </li>
+        </ul>        
+    </div>    
+</div>

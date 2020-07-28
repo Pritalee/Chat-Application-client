@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#02a39b;" >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"  [routerLink]="['/chat']">My name is {{myName}} </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/addFriends']"> Add Friend </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  [routerLink]="['/createGroup']"> Create Group </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+<div class="row">
+      <div class="col">
+          <ul class="list-group">
+              <li class="list-group-item " *ngFor="let item of friends" (click)="selectFriend(item)" >
+                  {{item}}                  
+              </li>
+          </ul>
+          <ul class="list-group">
+            <li class="list-group-item " *ngFor="let item of groups" (click)="selectGroup(item)" >
+                {{item}}                  
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+          <div class="row" style="padding-left:40px;margin-top:10px;">
+              <div class="card">
+                <div class="card-header">{{to}}</div>
+                  <div class="card-body">
+                  <div *ngIf="messageArray">
+                      <div *ngFor="let item of messageArray.messages">
+                        
+                            <div id="my-msg" *ngIf="(item.sender === myName && type==='message') || (item.sender===myName && item.receiver===to && type==='group') ">
+                                <strong>{{item.sender}} : </strong> {{item.msg}}
+                                <div><span>{{item.createdAt| date:'dd/MM/yyyy HH:mm:ss'}}</span></div>    
+                            </div>
+                            <div id="received-msg" *ngIf="(item.sender === to && type==='message') || (item.receiver==to && item.sender != myName && type==='group')">
+                                <strong>{{item.sender}} : </strong> {{item.msg}}
+                                <div><span>{{item.createdAt| date:'dd/MM/yyyy HH:mm:ss'}}</span></div>                                                                
+                            </div>
+                      
+                      </div>
+                    </div>
+                  
+                  <div class="list-group" *ngFor="let item of currentMsg">
+                    <div *ngIf="item.sender === to || item.sender === myName || item.receiver==to ">
+                      <!--<div><strong>{{item.sender}} : </strong> {{item.message}}</div> 
+                        <li  class="list-group-item ">-->
+
+                          <div id="my-msg" *ngIf="(item.sender === myName && type==='message') || (item.sender===myName && item.receiver===to && type==='group') ">
+                              <strong>{{item.sender}} : </strong> {{item.message}}
+                              <div><span>{{ item.CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></div>
+                          </div>
+                          <div id="received-msg" *ngIf="(item.sender === to && type==='message') || (item.receiver==to && item.sender != myName && type==='group')">
+                             <strong>{{item.sender}} : </strong> {{item.message}}
+                             <div><span>{{ item.CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></div>
+                          </div>
+                    
+                    </div>    
+                  </div>
+                </div>
+              </div>
+      </div>
+        <div class="row" *ngIf="to || group">
+          <input [(ngModel)]="message" name="message" type="text" placeholder="Message" />
+                     
+          <button class="btn btn-primary" id="send" (click)="sendMessage()">Send</button>
+        </div> 
+      </div>
+</div>

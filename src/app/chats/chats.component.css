@@ -1,0 +1,34 @@
+#my-msg{
+    
+    margin-left: 60px;
+    margin-top: 20px;
+    border-style: solid;
+    padding:10px;
+    background-color: #e6ffff;
+    border-color: #e6ffff;
+    border-radius: 3px;
+    
+    
+}
+
+#received-msg{
+   
+    margin-right: 60px;
+    margin-top: 20px;
+    border-style: solid;
+    padding:10px;
+    background-color: #02a39b;
+    border-color: #02a39b;
+    border-radius: 3px;
+    color:white;
+    
+}
+
+ .btn-primary,
+ .btn-primary:hover,
+ .btn-primary:active,
+ .btn-primary:visited,
+ .btn-primary:focus {
+     background-color: #02a39b;
+     border-color: #02a39b;
+ }
