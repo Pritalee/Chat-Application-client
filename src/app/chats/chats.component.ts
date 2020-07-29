@@ -16,11 +16,12 @@ export class ChatsComponent implements OnInit {
   private messageArray:any;
   private currentMsg=[];
   private type:String
-   //Array<{sender: String,receiver: String, message: String}> ;
-  //groups:Array<String>=['Best friends','Family time','DJites','School buddies'];
-  private friends=this.Auth.friends
-  private myName=this.Auth.userData;
-  private groups=this.Auth.groups;
+  //private friends=this.Auth.friends;
+  //private myName=this.Auth.userData;
+  //private groups=this.Auth.groups;
+  private friends:Array<String>;
+  private myName:String;
+  private groups=[];
 
 
   constructor(private chatService:ChatServiceService, private Auth:AuthService) { 
@@ -28,19 +29,15 @@ export class ChatsComponent implements OnInit {
       console.log(data);
       this.currentMsg.push(data)
     });
-    /*
-    this.chatService.newGroupMsgReceived().subscribe(data => {
-      console.log(data);
-      this.currentMsg.push(data)
-    }); */
   }
 
 
   ngOnInit() {
-    //<span class="badge badge-primary badge-pill">14</span>
-    //d-flex justify-content-between align-items-center
-    //<input [(ngModel)]="to" name="to" type="text" placeholder="to" /> 
-    // <p>This is {{myName}}</p>
+    this.myName =localStorage.getItem('username');
+    this.chatService.getLoggedUser(this.myName).subscribe(response=>{
+      console.log(response);
+  
+    })
   }
 
   sendMessage() {
@@ -59,9 +56,7 @@ export class ChatsComponent implements OnInit {
     .subscribe(data=>{
       this.messageArray=data.body;
       console.log(data.body);
-    })
-    
-    
+    })        
   }
 
   selectFriend(friend){

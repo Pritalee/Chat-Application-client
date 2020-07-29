@@ -30,6 +30,18 @@ export class ChatServiceService {
     return observable;
   }
 
+  getLoggedUser(username){
+    const data={
+      username:username
+    }
+    return this.http.post('http://localhost:5000/api/details',data,
+    {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+      }) 
+  }
+
   chatDetails(data){
 
     console.log(data);
@@ -61,6 +73,16 @@ export class ChatServiceService {
       withCredentials:true,
       headers:new HttpHeaders().append('Content-Type','application/json')
       });  
+
+  }
+
+  newGroup(data){
+    return this.http.post('http://localhost:5000/api/newGroup',data,
+      {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+      }); 
 
   }
 

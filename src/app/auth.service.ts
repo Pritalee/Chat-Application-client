@@ -45,9 +45,10 @@ export class AuthService {
  
 
     //console.log(this.userData);
-    //localStorage.setItem('jwtToken',data.token);
-    //localStorage.setItem('email',data.user.email);
-    //localStorage.setItem('username',data.user.userName);
+    localStorage.setItem('jwtToken',data.token);
+    localStorage.setItem('username',data.user.userName);
+    localStorage.setItem('friends',JSON.stringify(data.user.friends));
+    localStorage.setItem('groups',JSON.stringify(data.user.groups));
     //window.localStorage['jwtToken']=data.token;
     this.isLoggedIn=true
   }
