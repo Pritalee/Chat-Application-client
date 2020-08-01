@@ -6,9 +6,9 @@
     <div *ngIf="searchedUsers">
         <ul class="list-group">
           <li class="list-group-item " *ngFor="let item of searchedUsers.friends" >
-              <div>{{item.userName}}</div>  
-              
-              <button type="submit" class="btn btn-primary" (click)="AddFriends(item.userName)" >Connect</button>                  
+            <div *ngIf="! friends.includes(item.userName)" >{{item.userName}}              
+                <button type="submit" class="btn btn-primary" (click)="AddFriends(item.userName)" >Connect</button> 
+            </div>                   
           </li>
         </ul>        
     </div>    

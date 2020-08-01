@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ChatServiceService} from '../chat-service.service';
 import {AuthService} from '../auth.service';
 import { FormControl } from '@angular/forms';
+// import 'rxjs/add/operator/debounceTime';
+// import 'rxjs/add/operator/distinctUntilChanged';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,6 +18,7 @@ export class AddFriendsComponent implements OnInit {
   queryField: FormControl = new FormControl();
   private myName;
   private successMsg;
+  private friends=[];
 
   
   constructor( private chatService:ChatServiceService, private Auth:AuthService,private route: ActivatedRoute
@@ -23,8 +26,17 @@ export class AddFriendsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.myName=this.Auth.userData
-    this.queryField.valueChanges
+    if(this.Auth.userData){
+      this.myName=this.Auth.userData;
+      this.chatService.getLoggedUser(this.myName).subscribe(response=>{
+      this.friends=response.friends;
+      console.log(this.friends);
+    });
+
+    }
+    
+
+    this.queryField.valueChanges//.pipe(debounceTime(300),distinctUntilChanged())
     .subscribe( queryField => this.chatService.searchFriends(queryField)
         .subscribe(response=>{
           console.log(response);

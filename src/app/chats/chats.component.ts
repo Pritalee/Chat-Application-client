@@ -16,12 +16,12 @@ export class ChatsComponent implements OnInit {
   private messageArray:any;
   private currentMsg=[];
   private type:String
-  //private friends=this.Auth.friends;
-  //private myName=this.Auth.userData;
-  //private groups=this.Auth.groups;
-  private friends:Array<String>;
-  private myName:String;
-  private groups=[];
+  private friends=this.Auth.friends;
+  private myName=this.Auth.userData;
+  private groups=this.Auth.groups;
+  //private friends:Array<String>;
+  //private myName:String;
+  //private groups=[];
 
 
   constructor(private chatService:ChatServiceService, private Auth:AuthService) { 
@@ -31,13 +31,15 @@ export class ChatsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
+    /*
     this.myName =localStorage.getItem('username');
     this.chatService.getLoggedUser(this.myName).subscribe(response=>{
       console.log(response);
+      this.friends=response.friends;
+      this.groups=response.groups;
   
-    })
+    })*/
   }
 
   sendMessage() {
